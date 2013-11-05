@@ -1,13 +1,16 @@
-set :application, 'my_app_name'
-set :repo_url, 'git@example.com:me/my_repo.git'
+# -*- encoding: utf-8 -*-
+
+set :application, 'capistrano_devops'
+set :repo_url, 'https://github.com/parasquid/capistrano-devops.git'
 
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
-# set :deploy_to, '/var/www/my_app'
+set :deploy_to, '/home/vagrant/www/my_app'
 # set :scm, :git
+set :user, 'vagrant'
 
-# set :format, :pretty
-# set :log_level, :debug
+set :format, :pretty
+set :log_level, :debug
 # set :pty, true
 
 # set :linked_files, %w{config/database.yml}
