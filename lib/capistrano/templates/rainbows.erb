@@ -1,0 +1,14 @@
+working_directory "<%= current_path %>"
+pid "<%= rainbows_pid %>"
+stderr_path "<%= rainbows_log %>"
+stdout_path "<%= rainbows_log %>"
+
+listen "/tmp/rainbows.<%= application %>.sock"
+worker_processes <%= rainbows_workers %>
+timeout 30
+
+Rainbows! do
+  worker_connections 400
+  keepalive_timeout 0
+  use :EventMachine
+end
