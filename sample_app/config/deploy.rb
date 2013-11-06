@@ -2,8 +2,7 @@
 
 set :application, 'my_app'
 set :repo_url, 'https://github.com/parasquid/capistrano-devops.git'
-set :bundle_gemfile, -> { release_path.join('sample_app', 'Gemfile') }
-set :bundle_flags, '--quiet'
+set :release_path, ->{ current_path.join('sample_app') }
 
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
