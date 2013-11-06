@@ -22,7 +22,7 @@ namespace :utilities do
     end
   end
 
-  desc 'Install Bundler'
+  desc 'Install the Bundler gem (server-wide)'
   task :install_bundler do
     on roles(:app) do |host|
       execute :sudo, 'gem install bundler'

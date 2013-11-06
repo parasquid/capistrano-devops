@@ -1,7 +1,9 @@
 # -*- encoding: utf-8 -*-
 
-set :application, 'capistrano_devops'
-set :repo_url, 'https://github.com/railstutorial/sample_app_rails_4.git'
+set :application, 'my_app'
+set :repo_url, 'https://github.com/parasquid/capistrano-devops.git'
+set :bundle_gemfile, -> { release_path.join('sample_app', 'Gemfile') }
+set :bundle_flags, '--quiet'
 
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
