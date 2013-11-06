@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 
 set :application, 'capistrano_devops'
-set :repo_url, 'https://github.com/railstutorial/sample_app.git'
+set :repo_url, 'https://github.com/railstutorial/sample_app_rails_4.git'
 
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
