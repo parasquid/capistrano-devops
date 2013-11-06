@@ -31,3 +31,5 @@ TODO: Write usage instructions here
 https://github.com/jedi4ever/sahara
 
 deploy:check
+
+require 'capistrano/devops' in Capfile
