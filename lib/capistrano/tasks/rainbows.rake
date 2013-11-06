@@ -18,8 +18,6 @@ namespace :rainbows do
         execute :mv, "/tmp/rainbows_init /etc/init.d/rainbows_#{fetch(:application)}"
         execute :'update-rc.d', "-f rainbows_#{fetch(:application)} defaults"
       end
-      # run "#{sudo} mv /tmp/rainbows_init /etc/init.d/rainbows_#{fetch(:application)}"
-      # run "#{sudo} update-rc.d -f rainbows_#{fetch(:application)} defaults"
     end
   end
 
