@@ -22,10 +22,10 @@ GIT
 
 GIT
   remote: git://github.com/parasquid/capistrano-devops.git
-  revision: 523b1bdae0ea64a8ce72ccc7589f3a8617d1eb6f
+  revision: 4f398d994cd1c01dc9aac448b3f54b0f9b587826
   specs:
     capistrano-devops (0.0.1)
-      capistrano (~> 3.1.0)
+      capistrano (~> 3)
       capistrano-bundler
 
 GEM

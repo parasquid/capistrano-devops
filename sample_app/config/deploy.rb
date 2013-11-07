@@ -1,5 +1,8 @@
 # -*- encoding: utf-8 -*-
 
+# https://github.com/capistrano/capistrano/issues/639
+SSHKit.config.command_map[:rake] = "bundle exec rake"
+
 set :application, 'my_app'
 set :repo_url, 'https://github.com/parasquid/capistrano-devops.git'
 
