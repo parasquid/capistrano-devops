@@ -22,7 +22,7 @@ GIT
 
 GIT
   remote: git://github.com/parasquid/capistrano-devops.git
-  revision: 4f398d994cd1c01dc9aac448b3f54b0f9b587826
+  revision: d84c855cda8545d39fa529ff454384c6734579a1
   specs:
     capistrano-devops (0.0.1)
       capistrano (~> 3)
