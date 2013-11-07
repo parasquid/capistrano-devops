@@ -2,12 +2,12 @@
 
 set :application, 'my_app'
 set :repo_url, 'https://github.com/parasquid/capistrano-devops.git'
-set :release_path, ->{ current_path.join('sample_app') }
 
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
-set :deploy_to, '/home/vagrant/www/my_app'
-# set :scm, :git
+set :deploy_to, "/home/vagrant/www/#{fetch(:application)}"
+set :subdir, 'sample_app'
+set :scm, :git
 set :user, 'vagrant'
 
 set :format, :pretty
@@ -18,7 +18,7 @@ set :log_level, :debug
 # set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
-# set :keep_releases, 5
+set :keep_releases, 5
 
 namespace :deploy do
 
@@ -40,5 +40,18 @@ namespace :deploy do
   end
 
   after :finishing, 'deploy:cleanup'
+
+  namespace :deploy do
+
+      desc "Checkout subdirectory and delete all the other stuff"
+      task :checkout_subdir do
+        on roles(:app) do
+          execute :mv, "#{release_path}/#{fetch(:subdir)}/ /tmp && rm -rf #{release_path}/* && mv /tmp/#{fetch(:subdir)}/* #{release_path} && rm -rf /tmp/#{fetch(:subdir)}"
+        end
+      end
+
+  end
+
+  after "deploy:updating", "deploy:checkout_subdir"
 
 end
