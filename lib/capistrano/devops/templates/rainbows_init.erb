@@ -14,7 +14,7 @@ set -e
 TIMEOUT=${TIMEOUT-60}
 APP_ROOT=<%= current_path %>
 PID=<%= fetch(:rainbows_pid) %>
-CMD="cd <%= current_path %>; bundle exec rainbows -D -c <%= fetch(:rainbows_config) %> -E <%= fetch(:rails_env) %>"
+CMD="cd <%= current_path %>; bundle exec rainbows -D -c <%= fetch(:rainbows_config) %> -E <%= fetch(:rails_env, 'production') %>"
 AS_USER=<%= fetch(:rainbows_user) %>
 set -u
 

@@ -45,6 +45,8 @@ namespace :papertrail do
 
   desc 'Installs papertrail and adds remote_syslog'
   task :install do
+    invoke 'papertrail:add_to_rsyslog'
+    invoke 'papertrail:remote_syslog'
   end
 
 end
