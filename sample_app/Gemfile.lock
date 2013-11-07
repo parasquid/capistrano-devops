@@ -15,6 +15,12 @@ GIT
       capistrano
 
 GIT
+  remote: git://github.com/intridea/multi_json.git
+  revision: c1cf075453ce0110f7decc4f906444b1233bb67c
+  specs:
+    multi_json (1.8.2)
+
+GIT
   remote: git://github.com/parasquid/capistrano-devops.git
   revision: 28bc580d7e07485105e7f6ebf54a05fa7349f76b
   specs:
@@ -81,7 +87,6 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.25)
     minitest (4.7.5)
-    multi_json (1.8.2)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
     net-ssh (2.7.0)
@@ -169,6 +174,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   jbuilder (~> 1.2)
   jquery-rails
+  multi_json!
   rails (= 4.0.1)
   rainbows
   sass-rails (~> 4.0.0)
