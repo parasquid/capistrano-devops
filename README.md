@@ -1,12 +1,12 @@
 # Capistrano::Devops
 
-TODO: Write a gem description
+Capistrano::Devops gathers together some capistrano recipes to help in configuring and deploying applications
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'capistrano-devops'
+    gem 'capistrano-devops', group: development
 
 And then execute:
 
@@ -18,7 +18,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+    require 'capistrano/devops' in Capfile
 
 ## Contributing
 
@@ -28,8 +28,8 @@ TODO: Write usage instructions here
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
 
-https://github.com/jedi4ever/sahara
+## Development
 
-deploy:check
+There is a sample app in /sample_app that you can use to play around with the recipes. I personally use Vagrant and sandbox mode available at https://github.com/jedi4ever/sahara to create the VM for deployment.
 
-require 'capistrano/devops' in Capfile
+Right now the Vagrantfile still needs a bit of work (mostly the post-install script that will provision the server with ruby, bundler, and nginx)
