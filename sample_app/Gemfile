@@ -37,6 +37,7 @@ end
 
 # Use unicorn as the app server
 gem 'rainbows'
+gem 'eventmachine'
 
 group :development do
   # Use Capistrano for deployment

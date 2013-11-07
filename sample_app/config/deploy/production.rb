@@ -47,3 +47,4 @@ set :port, 2222
 # setting per server overrides global ssh_options
 
 fetch(:default_env).merge!(rails_env: :production)
+set :rails_env, 'production'

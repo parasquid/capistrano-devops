@@ -70,6 +70,7 @@ GEM
       execjs
     coffee-script-source (1.6.3)
     erubis (2.7.0)
+    eventmachine (1.0.3)
     execjs (2.0.2)
     hike (1.2.3)
     i18n (0.6.5)
@@ -172,6 +173,7 @@ DEPENDENCIES
   capistrano-rails
   capistrano-rbenv!
   coffee-rails (~> 4.0.0)
+  eventmachine
   jbuilder (~> 1.2)
   jquery-rails
   multi_json!
