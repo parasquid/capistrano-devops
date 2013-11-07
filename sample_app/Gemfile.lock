@@ -22,14 +22,14 @@ GIT
 
 GIT
   remote: git://github.com/parasquid/capistrano-devops.git
-  revision: 28bc580d7e07485105e7f6ebf54a05fa7349f76b
+  revision: 523b1bdae0ea64a8ce72ccc7589f3a8617d1eb6f
   specs:
     capistrano-devops (0.0.1)
       capistrano (~> 3.1.0)
       capistrano-bundler
 
 GEM
-  remote: https://rubygems.org/
+  remote: http://rubygems.org/
   specs:
     actionmailer (4.0.1)
       actionpack (= 4.0.1)
