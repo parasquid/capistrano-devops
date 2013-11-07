@@ -1,3 +1,5 @@
+load File.expand_path("../set_rails_env.rake", __FILE__)
+
 namespace :ssh do
   desc 'Adds public key to the authorized_keys file (to enable passwordless login)'
   task :add_key do

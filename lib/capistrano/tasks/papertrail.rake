@@ -3,12 +3,20 @@ load File.expand_path("../set_rails_env.rake", __FILE__)
 namespace :papertrail do
   # desc 'Adds papertrail to rsyslog as an output channel'
   task :add_to_rsyslog do
-    # as root add
-    # *.*          @logs.papertrailapp.com:31378
-    # to the end of /etc/rsyslog.conf
-
-    # restart rsyslog
-    # sudo /etc/init.d/rsyslog restart
+    on roles(:all) do
+      as :root do
+        within '/etc' do
+          # TODO: this is awfully familiar to the ssh block, need to DRY up
+          file = capture(:cat, 'rsyslog.conf')
+          lines = file.split("\n")
+          lines << '*.*          @logs.papertrailapp.com:31378' + "\n"
+          new_file = StringIO.new(lines.join("\n"))
+          upload! new_file, '/tmp/rsyslog.conf'
+          execute :mv, '/tmp/rsyslog.conf', 'rsyslog.conf'
+          execute :service, 'rsyslog restart'
+        end
+      end
+    end
   end
 
   # desc 'Install remote_syslog'
