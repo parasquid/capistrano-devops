@@ -44,8 +44,8 @@ group :development do
   gem 'capistrano', github: 'capistrano/capistrano'
   gem 'capistrano-rails'
   gem 'capistrano-bundler'
-  # gem 'capistrano-devops', github: 'parasquid/capistrano-devops'
-  gem 'capistrano-devops', path: '../../capistrano-devops'
+  gem 'capistrano-devops', github: 'parasquid/capistrano-devops'
+  # gem 'capistrano-devops', path: '../../capistrano-devops'
   gem 'capistrano-rbenv', github: "capistrano/rbenv"
 end
 

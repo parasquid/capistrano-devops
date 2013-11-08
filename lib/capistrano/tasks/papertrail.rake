@@ -21,6 +21,13 @@ namespace :papertrail do
 
   # desc 'Install remote_syslog'
   task :remote_syslog do
+    on roles(:all) do
+      as :root do
+        execute :gem, 'install remote_syslog'
+        shared_logs_location = shared_path.join()
+      end
+    end
+
     # sudo gem install remote_syslog
     # Paths to log file(s) can be specified on the command-line, or save log_files.yml.example (typically as /etc/log_files.yml). Edit it to define:
     #   - path to this app's log file, and any other log file(s) to watch.

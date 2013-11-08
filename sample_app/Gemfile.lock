@@ -20,8 +20,9 @@ GIT
   specs:
     multi_json (1.8.2)
 
-PATH
-  remote: ../../capistrano-devops
+GIT
+  remote: git://github.com/parasquid/capistrano-devops.git
+  revision: 3da03728e24405ce9591ab603e05f94276f8ba69
   specs:
     capistrano-devops (0.0.1)
       capistrano (~> 3)
