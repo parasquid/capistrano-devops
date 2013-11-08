@@ -18,7 +18,13 @@ Or install it yourself as:
 
 ## Usage
 
-    require 'capistrano/devops' in Capfile
+add in Capfile
+
+    require 'capistrano/devops'
+
+add in deploy.rb
+
+    set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 ## Contributing
 
