@@ -9,7 +9,7 @@ namespace :papertrail do
           # TODO: this is awfully familiar to the ssh block, need to DRY up
           file = capture(:cat, 'rsyslog.conf')
           lines = file.split("\n")
-          lines << '*.*          @logs.papertrailapp.com:31378' + "\n"
+          lines << "*.* @#{fetch(:papertrail_host, 'logs.papertrailapp.com')}:#{fetch(:papertrail_port, 1234)}" + "\n"
           new_file = StringIO.new(lines.join("\n"))
           upload! new_file, '/tmp/rsyslog.conf'
           execute :mv, '/tmp/rsyslog.conf', 'rsyslog.conf'
@@ -19,43 +19,54 @@ namespace :papertrail do
     end
   end
 
-  # desc 'Install remote_syslog'
+  # desc 'Install remote_syslog on all app servers'
   task :remote_syslog do
-    on roles(:all) do
+    on roles(:app) do
       as :root do
         execute :gem, 'install remote_syslog'
-        shared_logs_location = shared_path.join()
+
+        LOG_FILES_YML = <<-EOF
+files:
+  - #{shared_path.join('log').to_s}/*
+destination:
+  host: #{fetch(:papertrail_host, 'logs.papertrailapp.com')}
+  port: #{fetch(:papertrail_port, 1234)}
+prepend: #{fetch(:application)}
+        EOF
+
+        within '/etc' do
+          # again, DRY this up (because as() doesn't work with upload! or within yet)
+          upload! StringIO.new(LOG_FILES_YML), '/tmp/log_files.yml'
+          execute :mv, '/tmp/log_files.yml', 'log_files.yml'
+        end
+
+        within '/etc/init' do
+
+          UPSTART_CONF = <<-EOF
+description "Monitor files and send to remote syslog"
+start on runlevel [2345]
+stop on runlevel [!2345]
+
+respawn
+
+pre-start exec /usr/bin/test -e /etc/log_files.yml
+
+exec /usr/local/bin/remote_syslog -D --tls
+          EOF
+
+# TODO: find out where the remote_syslog is (or if it even got installed)
+# find / -name remote_syslog
+
+          # again, DRY this up (because as() doesn't work with upload! or within yet)
+          upload! StringIO.new(UPSTART_CONF), '/tmp/remote_syslog.conf'
+          execute :mv, '/tmp/remote_syslog.conf', 'remote_syslog.conf'
+
+        end
+
+        execute :service, 'remote_syslog start'
+
       end
     end
-
-    # sudo gem install remote_syslog
-    # Paths to log file(s) can be specified on the command-line, or save log_files.yml.example (typically as /etc/log_files.yml). Edit it to define:
-    #   - path to this app's log file, and any other log file(s) to watch.
-    #   - destination host and port (provided by Papertrail). You can find the settings by clicking Add System from the dashboard.
-
-    # /etc/log_files.yml
-    # files:
-    #   - /var/log/httpd/access_log
-    #   - /var/log/httpd/error_log
-    #   - /opt/misc/*.log
-    #   - /var/log/mysqld.log
-    #   - /var/run/mysqld/mysqld-slow.log
-    # destination:
-    #   host: logs.papertrailapp.com
-    #   port: 12345   # NOTE: change to your Papertrail port
-
-    # While remote_syslog does not need to run as root, it does need permission to write its PID file (by default to /var/run/remote_syslog.pid) and read permission on the log files it is monitoring.
-
-    # remote_syslog.upstart.conf
-    # description "Monitor files and send to remote syslog"
-    # start on runlevel [2345]
-    # stop on runlevel [!2345]
-
-    # respawn
-
-    # pre-start exec /usr/bin/test -e /etc/log_files.yml
-
-    # exec /var/lib/gems/1.8/bin/remote_syslog -D --tls
   end
 
   desc 'Installs papertrail and adds remote_syslog'

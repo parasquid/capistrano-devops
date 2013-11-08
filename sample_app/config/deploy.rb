@@ -58,3 +58,5 @@ namespace :deploy do
   before "deploy:symlink:shared", "deploy:checkout_subdir"
 
 end
+
+set :papertrail_port, 31378
