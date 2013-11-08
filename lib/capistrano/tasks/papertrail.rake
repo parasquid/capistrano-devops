@@ -33,7 +33,7 @@ files:
 destination:
   host: #{fetch(:papertrail_host, 'logs.papertrailapp.com')}
   port: #{fetch(:papertrail_port, 1234)}
-prepend: #{capture('hostname')}
+prepend: #{capture('hostname')} ->
 hostname: #{fetch(:application)}-#{host}
 EOF
 
