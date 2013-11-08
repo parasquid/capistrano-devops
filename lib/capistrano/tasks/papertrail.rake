@@ -32,7 +32,7 @@ destination:
   host: #{fetch(:papertrail_host, 'logs.papertrailapp.com')}
   port: #{fetch(:papertrail_port, 1234)}
 prepend: #{fetch(:application)}
-        EOF
+EOF
 
         within '/etc' do
           # again, DRY this up (because as() doesn't work with upload! or within yet)
@@ -51,8 +51,8 @@ respawn
 
 pre-start exec /usr/bin/test -e /etc/log_files.yml
 
-exec /usr/local/bin/remote_syslog -D --tls
-          EOF
+exec /usr/local/bin/remote_syslog -D
+EOF
 
 # TODO: find out where the remote_syslog is (or if it even got installed)
 # find / -name remote_syslog
