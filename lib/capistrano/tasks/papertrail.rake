@@ -21,17 +21,20 @@ namespace :papertrail do
 
   # desc 'Install remote_syslog on all app servers'
   task :remote_syslog do
-    on roles(:app) do
+    on roles(:app) do |host|
       as :root do
+        # TODO: only install the gem if the command doesn't exist
+        # maybe which remote_syslog ?
         execute :gem, 'install remote_syslog'
 
         LOG_FILES_YML = <<-EOF
 files:
-  - #{shared_path.join('log').to_s}/*
+  - #{shared_path.join('log').to_s}/*.log
 destination:
   host: #{fetch(:papertrail_host, 'logs.papertrailapp.com')}
   port: #{fetch(:papertrail_port, 1234)}
-prepend: #{fetch(:application)}
+prepend: #{capture('hostname')}
+hostname: #{fetch(:application)}-#{host}
 EOF
 
         within '/etc' do
@@ -63,7 +66,7 @@ EOF
 
         end
 
-        execute :service, 'remote_syslog start'
+        execute :service, 'remote_syslog restart'
 
       end
     end
