@@ -7,6 +7,7 @@ namespace :papertrail do
       as :root do
         within '/etc' do
           # TODO: this is awfully familiar to the ssh block, need to DRY up
+          # TODO: instead of appending at the bottom, create a .conf in /etc/rsyslog.d/
           file = capture(:cat, 'rsyslog.conf')
           lines = file.split("\n")
           lines << "*.* @#{fetch(:papertrail_host, 'logs.papertrailapp.com')}:#{fetch(:papertrail_port, 1234)}" + "\n"
@@ -66,8 +67,16 @@ EOF
 
         end
 
-        execute :service, 'remote_syslog restart'
+      end
+    end
+    invoke 'papertrail:restart_remote_syslog'
+  end
 
+  desc 'Restarts remote syslog'
+  task :restart_remote_syslog do
+    on roles(:app) do
+      as :root do
+        execute :service, 'remote_syslog restart'
       end
     end
   end
