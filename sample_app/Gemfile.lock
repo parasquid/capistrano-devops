@@ -20,11 +20,10 @@ GIT
   specs:
     multi_json (1.8.2)
 
-GIT
-  remote: git://github.com/parasquid/capistrano-devops.git
-  revision: bebdfb4ac33f80fba5cc06e93af96ced0f741f9a
+PATH
+  remote: ../../capistrano-devops
   specs:
-    capistrano-devops (0.0.2)
+    capistrano-devops (0.0.4)
       capistrano (~> 3)
       capistrano-bundler
 
