@@ -24,7 +24,7 @@ namespace :rainbows do
   %w[start stop restart].each do |command|
     desc "#{command} rainbows"
     task command do
-      on roles :app do
+      on roles(:app), in: :sequence, wait: 5 do
         command_string = "rainbows_#{fetch(:application)} #{command}"
         execute :service, command_string
       end
