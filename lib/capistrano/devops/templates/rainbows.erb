@@ -5,7 +5,7 @@ stdout_path "<%= fetch(:rainbows_log) %>"
 
 listen "/tmp/rainbows.<%= fetch(:application) %>.sock"
 worker_processes <%= fetch(:rainbows_workers) %>
-timeout 30
+timeout <%= fetch(:rainbows_timeout) %>
 
 Rainbows! do
   worker_connections 400
