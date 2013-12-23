@@ -10,8 +10,8 @@ namespace :redis do
   %w[start stop restart].each do |command|
     desc "#{command} redis"
     task command do
-      on roles(:app), in: :sequence, wait: 5 do
-        command_string = "redis #{command}"
+      on roles(:db), in: :sequence, wait: 5 do
+        command_string = "redis-server #{command}"
         execute :service, command_string
       end
     end
