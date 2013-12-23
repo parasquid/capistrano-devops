@@ -2,6 +2,7 @@ require "capistrano/devops/version"
 require 'capistrano/devops/base'
 require 'capistrano/devops/papertrail'
 require 'capistrano/devops/nginx'
+require 'capistrano/devops/redis'
 require 'capistrano/devops/rainbows'
 require 'capistrano/devops/postgresql'
 require 'capistrano/devops/ssh'
