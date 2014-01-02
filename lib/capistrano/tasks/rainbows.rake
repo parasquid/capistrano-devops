@@ -4,6 +4,7 @@ set :rainbows_config, ->{ "#{shared_path}/config/rainbows.rb" }
 set :rainbows_log, ->{ "#{shared_path}/log/rainbows.log" }
 set :rainbows_workers, 2
 set :rainbows_timeout, 30
+set :rainbows_max_body_size, 1*1024*1024
 
 namespace :rainbows do
   desc "Setup Rainbows initializer and app configuration"
