@@ -27,7 +27,9 @@ namespace :rainbows do
     task command do
       on roles(:app), in: :sequence, wait: 5 do
         command_string = "rainbows_#{fetch(:application)} #{command}"
-        execute :service, command_string
+        as :root do
+          execute :service, command_string
+        end
       end
     end
   end
