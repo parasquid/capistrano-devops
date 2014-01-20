@@ -1,4 +1,5 @@
 set :server_name, ->{ fetch(:application) }
+set :nginx_proxy_read_timeout, '60s'
 
 namespace :nginx do
   desc "Installs nginx on all app servers"
