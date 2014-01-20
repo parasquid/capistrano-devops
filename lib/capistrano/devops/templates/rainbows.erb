@@ -11,4 +11,5 @@ Rainbows! do
   worker_connections 400
   keepalive_timeout 0
   use :EventMachine
+  client_max_body_size <%= fetch(:rainbows_max_body_size) %>
 end
