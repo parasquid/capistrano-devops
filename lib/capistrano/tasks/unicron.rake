@@ -4,6 +4,7 @@ set :unicron_config, ->{ "#{shared_path}/config/unicron.rb" }
 set :unicron_log, ->{ "#{shared_path}/log/unicron.log" }
 set :unicron_workers, 8
 set :unicron_timeout, 30
+set :unicron_force_ssl, true
 
 namespace :unicron do
   desc "Setup unicron initializer and app configuration"
