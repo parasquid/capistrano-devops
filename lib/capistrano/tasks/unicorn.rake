@@ -4,7 +4,7 @@ set :unicorn_config, ->{ "#{shared_path}/config/unicorn.rb" }
 set :unicorn_log, ->{ "#{shared_path}/log/unicorn.log" }
 set :unicorn_workers, 8
 set :unicorn_timeout, 30
-set :unicorn_force_ssl, true
+set :unicorn_force_ssl, false
 
 namespace :unicorn do
   desc "Setup unicorn initializer and app configuration"
