@@ -1,5 +1,5 @@
 module Capistrano
   module Devops
-    VERSION = "0.0.11"
+    VERSION = "0.0.12"
   end
 end
