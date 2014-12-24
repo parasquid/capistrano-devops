@@ -37,4 +37,23 @@ namespace :nginx do
       after 'nginx:rainbows:setup', 'nginx:restart'
     end
   end
+
+  namespace :unicorn do
+    desc "Setup nginx configuration for this application (unicorn)"
+    task :setup do
+      on roles :web do
+        if fetch(:unicorn_force_ssl) == true
+          template "nginx_unicorn_ssl.erb", "/tmp/nginx_conf"
+        else
+          template "nginx_unicorn.erb", "/tmp/nginx_conf"
+        end
+
+        as :root do
+          execute :mv, "/tmp/nginx_conf /etc/nginx/sites-enabled/#{fetch(:application)}"
+          execute :rm, "-f /etc/nginx/sites-enabled/default"
+        end
+      end
+      after 'nginx:unicorn:setup', 'nginx:restart'
+    end
+  end
 end
