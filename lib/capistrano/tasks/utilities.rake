@@ -18,7 +18,9 @@ namespace :utilities do
   task :install_ruby do
     invoke :'utilities:common_packages'
     on roles(:app) do |host|
-      execute :curl, "-Lo- https://gist.github.com/parasquid/5624732/raw/install-ruby-2-ubuntu.sh | bash"
+      execute :sudo, 'apt-add-repository ppa:brightbox/ruby-ng -y'
+      execute :sudo, "apt-get -y update"
+      execute :sudo, 'apt-get -y install ruby2.1 ruby2.1-dev nodejs'
     end
   end
 
