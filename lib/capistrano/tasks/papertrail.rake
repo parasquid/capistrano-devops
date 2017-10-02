@@ -55,7 +55,7 @@ respawn
 
 pre-start exec /usr/bin/test -e /etc/log_files.yml
 
-exec /usr/local/bin/remote_syslog -D
+exec /usr/local/bin/remote_syslog -p #{fetch(:papertrail_port, 1234)} -D
 EOF
 
 # TODO: find out where the remote_syslog is (or if it even got installed)
