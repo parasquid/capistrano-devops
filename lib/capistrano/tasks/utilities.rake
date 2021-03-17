@@ -10,7 +10,7 @@ namespace :utilities do
   task :common_packages do
     on roles(:app) do |host|
       execute :sudo, "apt-get -y update"
-      execute :sudo, "apt-get -y install software-properties-common python-software-properties htop iftop iotop mytop sysstat screen curl subversion git-core rsync"
+      execute :sudo, "apt-get -y install software-properties-common htop iftop iotop mytop sysstat screen curl subversion git-core rsync"
     end
   end
 
